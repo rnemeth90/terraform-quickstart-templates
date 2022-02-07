@@ -15,3 +15,33 @@ steps:
     terraformVersion: 'latest'
 
 
+- task: TerraformCLI@0
+  inputs:
+    command: 'init'
+    backendType: 'azurerm'
+    backendServiceArm: 'TestEnvironment'
+    backendAzureRmSubscriptionId: 'asdf'
+    backendAzureRmResourceGroupName: 'asdf'
+    backendAzureRmStorageAccountName: 'asdf'
+    backendAzureRmContainerName: 'asdf'
+    backendAzureRmKey: 'asdf'
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'validate'
+    commandOptions: '--input=false'
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'plan'
+    environmentServiceName: 'TestEnvironment'
+    providerAzureRmSubscriptionId: 'asdf'
+    commandOptions: '-lock=false -input=false -detailed-exitcode -var-file=$(System.DefaultWorkingDirectory)/keyvault.tfvars -out=keyvault-$(build.buildid).tfplan'
+    publishPlanResults: 'keyvault-$(build.buildid).tfplan'
+    
+- task: TerraformCLI@0
+  inputs:
+    command: 'apply'
+    environmentServiceName: 'TestEnvironment'
+    commandOptions: "-auto-approve -input=false keyvault-$(build.buildid).tfplan"
+    providerAzureRmSubscriptionId: 'asdf'
