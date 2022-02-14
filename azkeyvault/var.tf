@@ -20,3 +20,9 @@ variable "key_vault_sku" {
   description = "The key vault sku, standard or premium"
   default = "standard"
 }
+
+
+variable "storage_account_name" {
+  type = string
+  description = "Storage account to store the tfstate"
+}

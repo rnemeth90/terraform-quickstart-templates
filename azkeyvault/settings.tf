@@ -6,7 +6,9 @@ terraform {
       version = "=2.95.0"
     }
   }
-  backend "azurerm" {}
+  backend "azurerm" {
+    
+  }
 }
 
 
