@@ -1,7 +1,21 @@
+variable "aks_service_principal_app_id" {
+
+}
+
+variable "aks_service_principal_client_secret" {
+
+}
+
+variable "aks_service_principal_object_id" {
+
+}
+
 variable "aks_tags" {
-  type = map(any)
+  type        = map(string)
+  description = "A map of tags to apply to the AKS cluster."
+
   default = {
-    "mytag" = "mytagvalue"
+    source = "terraform"
   }
 }
 
@@ -11,10 +25,6 @@ variable "resource_group_name_prefix" {
 
 variable "resource_group_location" {
   default = "eastus"
-}
-
-variable "agent_count" {
-  default = 3
 }
 
 variable "ssh_public_key" {
@@ -29,28 +39,6 @@ variable "cluster_name" {
   default = "k8stest"
 }
 
-variable "resource_group_name" {
-  default = "azure-k8stest"
-}
-
-variable "location" {
-  default = "Central US"
-}
-
-variable "log_analytics_workspace_name" {
-  default = "testLogAnalyticsWorkspaceName"
-}
-
-# refer https://azure.microsoft.com/global-infrastructure/services/?products=monitor for log analytics available regions
-variable "log_analytics_workspace_location" {
-  default = "eastus"
-}
-
-# refer https://azure.microsoft.com/pricing/details/monitor/ for log analytics pricing
-variable "log_analytics_workspace_sku" {
-  default = "PerGB2018"
-}
-
 variable "node_pool_name" {
   default = "k8snodepool"
 }
@@ -60,27 +48,60 @@ variable "np_size" {
 }
 
 variable "np_labels" {
-  type = map(any)
+  type        = map(string)
+  description = "A map of the node pool labels to apply to the node pool."
+
   default = {
-    "mylabel" = "mylabelvalue"
+    os = "linux"
   }
 }
 
 variable "np_tags" {
-  type = map(any)
+  type        = map(string)
+  description = "A map of tags to apply to the node pool."
+
   default = {
-    "mytag" = "mytagvalue"
+    source = "terraform"
   }
 }
 
-variable "aks_service_principal_object_id" {
-
+variable "np_count" {
+  default = 2
 }
 
-variable "aks_service_principal_app_id" {
-
+variable "np-availability_zones" {
+  default = "1,2,3"
 }
 
-variable "aks_service_principal_client_secret" {
+variable "np-enable_auto_scaling" {
+  default     = "false"
+  description = "This variable holds the value for the default node autoscaling setting"
+}
 
+variable "np-enable_auto_scaling_min_count" {
+  default     = 1
+  description = "This variable holds the value for the default node autoscaling setting min count"
+}
+variable "np-enable_auto_scaling_max_count" {
+  default     = 2
+  description = "This variable holds the value for the default node autoscaling setting max count"
+}
+
+variable "np-max_pods" {
+  default     = "30"
+  description = "This variable holds the value for the default node pool max pods value"
+}
+
+variable "np-disk_size_gb" {
+  description = "This variable holds the value for the default node pool disk Size"
+  default     = "30"
+}
+
+variable "np-os_disk_type" {
+  default = "Managed"
+}
+
+variable "np-os_type" {
+  description = "The Operating System which should be used for this Node Pool."
+  default     = "linux"
 }
