@@ -24,17 +24,16 @@ resource "azurerm_kubernetes_cluster" "k8s" {
 
   default_node_pool {
     name       = "agentpool"
-    node_count = var.node_count
+    node_count = var.np_count
     vm_size    = var.np_size
   }
 
-  service_principal {
-    client_id     = var.aks_service_principal_app_id
-    client_secret = var.aks_service_principal_client_secret
+  identity {
+    type = "SystemAssigned"
   }
 
   network_profile {
-    load_balancer_sku = "Standard"
+    load_balancer_sku = "standard"
     network_plugin    = "kubenet"
   }
 
@@ -49,7 +48,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "np" {
   enable_auto_scaling   = var.np-enable_auto_scaling
   max_count             = var.np-enable_auto_scaling_max_count
   min_count             = var.np-enable_auto_scaling_min_count
-  availability_zones    = (var.np-availability_zones == "") ? [] : split(",", var.np-availability_zones)
+  zones                 = (var.np-availability_zones == "") ? [] : split(",", var.np-availability_zones)
   max_pods              = var.np-max_pods
   os_disk_size_gb       = var.np-disk_size_gb
   os_disk_type          = var.np-os_disk_type

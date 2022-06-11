@@ -1,15 +1,3 @@
-variable "aks_service_principal_app_id" {
-
-}
-
-variable "aks_service_principal_client_secret" {
-
-}
-
-variable "aks_service_principal_object_id" {
-
-}
-
 variable "aks_tags" {
   type        = map(string)
   description = "A map of tags to apply to the AKS cluster."
@@ -74,7 +62,7 @@ variable "np-availability_zones" {
 }
 
 variable "np-enable_auto_scaling" {
-  default     = "false"
+  default     = "true"
   description = "This variable holds the value for the default node autoscaling setting"
 }
 
@@ -103,5 +91,5 @@ variable "np-os_disk_type" {
 
 variable "np-os_type" {
   description = "The Operating System which should be used for this Node Pool."
-  default     = "linux"
+  default     = "Linux"
 }
