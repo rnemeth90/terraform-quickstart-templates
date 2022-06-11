@@ -11,11 +11,11 @@ variable "storage_account_name" {
 }
 
 variable "storage_account_tier" {
-  default = "standard"
+  default = "Standard"
 }
 
 variable "storage_account_replication_type" {
-  default = "lrs"
+  default = "LRS"
 }
 
 variable "tags" {
