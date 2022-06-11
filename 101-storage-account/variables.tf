@@ -1,55 +1,26 @@
-variable "customVmName" {
-  description = "This is the name of the your VM"
+variable "resource_group_name" {
+  default = "rg-development"
 }
 
-variable "userImageStorageAccountName" {
-  description = "This is the name of the your storage account"
+variable "location" {
+  default = "eastus"
 }
 
-variable "userImageStorageAccountResourceGroupName" {
-  description = "Resource group of the existing storage account"
+variable "storage_account_name" {
+  default = "storageaccount01"
 }
 
-variable "osDiskVhdUri" {
-  description = "Uri of the your user image"
+variable "storage_account_tier" {
+  default = "standard"
 }
 
-variable "dnsLabelPrefix" {
-  description = "DNS Label for the Public IP. Must be lowercase. It should match with the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$ or it will raise an error"
+variable "storage_account_replication_type" {
+  default = "lrs"
 }
 
-variable "adminUserName" {
-  description = "User Name for the Virtual Machine"
-}
-
-variable "adminPassword" {
-  description = "Password for the Virtual Machine"
-}
-
-variable "osType" {
-  description = "This is the OS that your VM will be running"
-}
-
-variable "vmSize" {
-  description = "This is the size of your VM"
-}
-
-variable "newOrExistingVnet" {
-  description = "Select if this template needs a new VNet or will reference an existing VNet"
-}
-
-variable "newOrExistingVnetName" {
-  description = "New or Existing VNet Name"
-}
-
-variable "newOrExistingSubnetName" {
-  description = "New or Existing subnet Name"
-}
-
-variable "resourceGroupName" {
-  description = "Name of the resource group container for all resources"
-}
-
-variable "resourceGroupLocation" {
-  description = "Azure region used for resource deployment"
+variable "tags" {
+  type = map(string)
+  default = {
+    source = "terraform"
+  }
 }
